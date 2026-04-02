@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kossa Fall — Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #006699;
+      --blue-light: #e6f1fb;
+      --blue-mid: #b5d4f4;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --bg: #fafaf8;
+      --bg-card: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 56px;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      color: var(--blue); letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 13px; color: var(--text-muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    /* SECTIONS */
+    section { max-width: 880px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.1em;
+      color: var(--blue); text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    h2 { font-size: 28px; font-weight: 500; letter-spacing: -0.03em; margin-bottom: 2rem; }
+    hr.divider { border: none; border-top: 0.5px solid var(--border); max-width: 880px; margin: 0 auto; }
+
+    /* HERO */
+    #hero {
+      padding-top: 9rem; padding-bottom: 5rem;
+      max-width: 880px; margin: 0 auto;
+    }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; color: var(--blue);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+    .hero-name {
+      font-size: clamp(42px, 7vw, 72px);
+      font-weight: 300; letter-spacing: -0.04em;
+      line-height: 1.05; margin-bottom: 0.4rem;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+    .hero-name span { color: var(--blue); font-weight: 500; }
+    .hero-subtitle {
+      font-size: 16px; color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s;
+    }
+    .hero-desc {
+      font-size: 15px; color: var(--text);
+      max-width: 580px; line-height: 1.75;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 20px; border-radius: 6px;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: all 0.2s;
+      border: 0.5px solid var(--border-strong);
+      background: var(--bg-card); color: var(--text);
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
+    .btn-primary { background: var(--blue); color: white; border-color: var(--blue); }
+    .btn-primary:hover { background: #005580; color: white; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .skill-card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .skill-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 0.07em;
+      margin-bottom: 10px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: 12px; padding: 3px 10px;
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: 20px; color: var(--text-muted);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,102,153,0.08);
+    }
+    .project-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--blue-mid);
+      margin-bottom: 10px;
+    }
+    .project-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+    .project-desc {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.65; flex: 1; margin-bottom: 14px;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tag {
+      font-size: 11px; padding: 2px 9px;
+      background: var(--blue-light); color: var(--blue);
+      border-radius: 20px; font-weight: 500;
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 2rem; padding: 1.75rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .exp-item:first-child { border-top: 0.5px solid var(--border); }
+    .exp-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; color: var(--text-muted);
+      padding-top: 3px;
+    }
+    .exp-role { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+    .exp-org { font-size: 13px; color: var(--blue); margin-bottom: 8px; }
+    .exp-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+    /* FORMATION */
+    .formation-list { display: flex; flex-direction: column; gap: 0; }
+    .formation-item {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 2rem; padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .formation-item:first-child { border-top: 0.5px solid var(--border); }
+    .formation-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; color: var(--text-muted);
+      padding-top: 3px;
+    }
+    .formation-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+    .formation-school { font-size: 13px; color: var(--blue); }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .contact-card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 1.1rem 1.25rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: block;
+    }
+    .contact-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .contact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 5px;
+    }
+    .contact-value { font-size: 13px; color: var(--blue); word-break: break-all; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--text-muted);
+      border-top: 0.5px solid var(--border);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 4rem 1.25rem; }
+      #hero { padding: 7rem 1.25rem 4rem; }
+      .exp-item, .formation-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">kossa.fall</span>
+  <div class="nav-links">
+    <a href="#skills">Compétences</a>
+    <a href="#projects">Projets</a>
+    <a href="#experience">Expériences</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-label">Disponible · Alternance septembre 2026</div>
+  <h1 class="hero-name">Kossa <span>Fall</span></h1>
+  <div class="hero-subtitle">Data Scientist · Master MASERATI, UPEC · Diplômé ENSAE Dakar</div>
+  <p class="hero-desc">
+    Spécialisé en machine learning, économétrie et analyse prédictive, avec 6 mois d'expérience en agence nationale de statistique. Je maîtrise Python, R, SQL, Django et Flask pour la modélisation avancée, ainsi que Power BI et R Shiny pour la visualisation décisionnelle.
+  </p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="cv_kossa_fall.pdf" download>Télécharger le CV</a>
+    <a class="btn" href="https://www.linkedin.com/in/kossa-fall/" target="_blank">LinkedIn</a>
+    <a class="btn" href="https://github.com/fallthierno24" target="_blank">GitHub</a>
+    <a class="btn" href="mailto:kossafall5@gmail.com">Email</a>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag reveal">Compétences</div>
+  <h2 class="reveal">Stack technique</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-cat">Python & Data Science</div>
+      <div class="skill-tags">
+        <span class="skill-tag">pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">scikit-learn</span>
+        <span class="skill-tag">statsmodels</span>
+        <span class="skill-tag">matplotlib</span>
+        <span class="skill-tag">seaborn</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Machine Learning & IA</div>
+      <div class="skill-tags">
+        <span class="skill-tag">XGBoost</span>
+        <span class="skill-tag">Random Forest</span>
+        <span class="skill-tag">NLP / TF-IDF</span>
+        <span class="skill-tag">GridSearchCV</span>
+        <span class="skill-tag">SMOTE</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Développement Web & API</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Django</span>
+        <span class="skill-tag">Flask</span>
+        <span class="skill-tag">API REST</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Statistiques & Économétrie</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Régression logistique</span>
+        <span class="skill-tag">Séries temporelles</span>
+        <span class="skill-tag">ACP / ACM</span>
+        <span class="skill-tag">Tests d'hypothèses</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Big Data</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PySpark</span>
+        <span class="skill-tag">MLlib</span>
+        <span class="skill-tag">Hadoop / HDFS</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">SQL & Data Engineering</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL avancé</span>
+        <span class="skill-tag">SAS</span>
+        <span class="skill-tag">Stata</span>
+        <span class="skill-tag">R (Tidyverse)</span>
+        <span class="skill-tag">Scrapy</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Data Viz & BI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">R Shiny</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">LaTeX</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Gestion de projet & Leadership</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Conduite de projet</span>
+        <span class="skill-tag">Coordination</span>
+        <span class="skill-tag">Communication décideurs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag reveal">Projets</div>
+  <h2 class="reveal">Réalisations</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-number">01</div>
+      <div class="project-title">Détection de fraude</div>
+      <div class="project-desc">Modèle de détection de transactions frauduleuses sur données fortement déséquilibrées. Comparaison de plusieurs algorithmes avec optimisation GridSearchCV.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">XGBoost</span>
+        <span class="project-tag">SMOTE</span>
+        <span class="project-tag">AUC-ROC</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-number">02</div>
+      <div class="project-title">Scoring crédit</div>
+      <div class="project-desc">Data mining sur données bancaires, modèle de scoring et segmentation client par profil de risque. Interprétation métier des résultats.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">R</span>
+        <span class="project-tag">Régression logistique</span>
+        <span class="project-tag">Arbres de décision</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-number">03</div>
+      <div class="project-title">Dashboard offres d'emploi</div>
+      <div class="project-desc">Collecte automatique d'offres via web scraping et dashboard interactif pour analyser les tendances du marché : compétences, secteurs, localisations.</div>
+      <div class="project-tags">
+        <span class="project-tag">Scrapy</span>
+        <span class="project-tag">BeautifulSoup</span>
+        <span class="project-tag">Power BI</span>
+        <span class="project-tag">R Shiny</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-number">04</div>
+      <div class="project-title">Application gestion scolaire</div>
+      <div class="project-desc">Application web pour automatiser les tâches scolaires : suivi des absences et emplois du temps, génération de bulletins, visualisation interactive des résultats.</div>
+      <div class="project-tags">
+        <span class="project-tag">Django</span>
+        <span class="project-tag">Flask</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Data Viz</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-number">05</div>
+      <div class="project-title">Big Data — Apache Spark</div>
+      <div class="project-desc">Pipeline de traitement distribué avec PySpark : transformations, agrégations, jointures à grande échelle. Modèles MLlib et optimisation Hadoop/HDFS.</div>
+      <div class="project-tags">
+        <span class="project-tag">PySpark</span>
+        <span class="project-tag">MLlib</span>
+        <span class="project-tag">Hadoop</span>
+        <span class="project-tag">HDFS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag reveal">Expériences</div>
+  <h2 class="reveal">Parcours professionnel</h2>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div class="exp-period">4 mois</div>
+      <div>
+        <div class="exp-role">Data Scientist</div>
+        <div class="exp-org">Agence Nationale de la Statistique et de la Démographie (ANSD)</div>
+        <div class="exp-desc">Data engineering multisources, modélisation ML supervisée (scikit-learn, XGBoost) pour l'identification des ménages précaires. Estimation de l'insécurité alimentaire à l'échelle départementale avec restitution aux décideurs politiques.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-period">2 mois</div>
+      <div>
+        <div class="exp-role">Analyste Statisticien</div>
+        <div class="exp-org">Agence Nationale de la Statistique et de la Démographie (ANSD)</div>
+        <div class="exp-desc">Traitement des données de l'EDS 2023, modélisation économétrique (logit binaire), interprétation des odds ratios. Développement d'un pipeline NLP de classification automatique de CV — score 98/100.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem;">
+    <div class="section-tag reveal">Formation</div>
+    <h2 class="reveal" style="margin-top:0.5rem;">Cursus académique</h2>
+    <div class="formation-list">
+      <div class="formation-item reveal">
+        <div class="formation-year">2025 — 2027</div>
+        <div>
+          <div class="formation-title">Master MASERATI — Parcours Data Science <em>(en cours)</em></div>
+          <div class="formation-school">Université Paris-Est Créteil (UPEC)</div>
+        </div>
+      </div>
+      <div class="formation-item reveal">
+        <div class="formation-year">2022 — 2025</div>
+        <div>
+          <div class="formation-title">Diplôme d'Analyste Statisticien — Parcours Data Science</div>
+          <div class="formation-school">École Nationale de la Statistique et de l'Analyse Économique (ENSAE Dakar)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag reveal">Contact</div>
+  <h2 class="reveal">Me contacter</h2>
+  <div class="contact-grid">
+    <a class="contact-card reveal" href="mailto:kossafall5@gmail.com">
+      <div class="contact-label">Email</div>
+      <div class="contact-value">kossafall5@gmail.com</div>
+    </a>
+    <a class="contact-card reveal" href="tel:+33751404304">
+      <div class="contact-label">Téléphone</div>
+      <div class="contact-value">+33 7 51 40 43 04</div>
+    </a>
+    <a class="contact-card reveal" href="https://www.linkedin.com/in/kossa-fall/" target="_blank">
+      <div class="contact-label">LinkedIn</div>
+      <div class="contact-value">linkedin.com/in/kossa-fall</div>
+    </a>
+    <a class="contact-card reveal" href="https://github.com/fallthierno24" target="_blank">
+      <div class="contact-label">GitHub</div>
+      <div class="contact-value">github.com/fallthierno24</div>
+    </a>
+    <div class="contact-card reveal">
+      <div class="contact-label">Localisation</div>
+      <div class="contact-value">Vaujours, France</div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-label">Disponibilité</div>
+      <div class="contact-value">Alternance — sept. 2026</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Kossa Fall · Vaujours, France
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
