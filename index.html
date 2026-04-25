@@ -31,7 +31,6 @@
       line-height: 1.7;
     }
 
-    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -52,7 +51,6 @@
     }
     .nav-links a:hover { color: var(--blue); }
 
-    /* SECTIONS */
     section { max-width: 880px; margin: 0 auto; padding: 5rem 2rem; }
     .section-tag {
       font-family: 'DM Mono', monospace;
@@ -63,7 +61,6 @@
     h2 { font-size: 28px; font-weight: 500; letter-spacing: -0.03em; margin-bottom: 2rem; }
     hr.divider { border: none; border-top: 0.5px solid var(--border); max-width: 880px; margin: 0 auto; }
 
-    /* HERO */
     #hero {
       padding-top: 9rem; padding-bottom: 5rem;
       max-width: 880px; margin: 0 auto;
@@ -125,7 +122,6 @@
     .btn-primary { background: var(--blue); color: white; border-color: var(--blue); }
     .btn-primary:hover { background: #005580; color: white; }
 
-    /* SKILLS */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -152,7 +148,6 @@
       border-radius: 20px; color: var(--text-muted);
     }
 
-    /* PROJECTS */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -188,7 +183,6 @@
       border-radius: 20px; font-weight: 500;
     }
 
-    /* EXPERIENCE */
     .exp-list { display: flex; flex-direction: column; gap: 0; }
     .exp-item {
       display: grid; grid-template-columns: 140px 1fr;
@@ -205,7 +199,6 @@
     .exp-org { font-size: 13px; color: var(--blue); margin-bottom: 8px; }
     .exp-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
 
-    /* FORMATION */
     .formation-list { display: flex; flex-direction: column; gap: 0; }
     .formation-item {
       display: grid; grid-template-columns: 140px 1fr;
@@ -221,7 +214,6 @@
     .formation-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
     .formation-school { font-size: 13px; color: var(--blue); }
 
-    /* CONTACT */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -244,7 +236,6 @@
     }
     .contact-value { font-size: 13px; color: var(--blue); word-break: break-all; }
 
-    /* FOOTER */
     footer {
       text-align: center; padding: 2rem;
       font-family: 'DM Mono', monospace;
@@ -252,7 +243,6 @@
       border-top: 0.5px solid var(--border);
     }
 
-    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -263,7 +253,6 @@
     }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* RESPONSIVE */
     @media (max-width: 640px) {
       nav { padding: 0 1.25rem; }
       .nav-links { gap: 1rem; }
@@ -294,10 +283,9 @@
     <h1 class="hero-name">Kossa <span>Fall</span></h1>
     <div class="hero-subtitle">Data Scientist · Master MASERATI, UPEC · Diplômé ENSAE Dakar</div>
     <p class="hero-desc">
-      Spécialisé en machine learning, économétrie et analyse prédictive, avec 6 mois d'expérience en agence nationale de statistique. Je maîtrise Python, R, SQL, Django et Flask pour la modélisation avancée, ainsi que Power BI et R Shiny pour la visualisation décisionnelle.
+      Spécialisé en machine learning, économétrie et analyse prédictive, avec 6 mois d'expérience en agence nationale de statistique. Je maîtrise Python, R, SAS, Stata et SQL pour la modélisation avancée, ainsi que Power BI et R Shiny pour la visualisation décisionnelle.
     </p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="CV_Kossa_FALL.pdf" download>Télécharger le CV</a>
       <a class="btn" href="https://www.linkedin.com/in/kossa-fall/" target="_blank">LinkedIn</a>
       <a class="btn" href="https://github.com/fallthierno24" target="_blank">GitHub</a>
       <a class="btn" href="mailto:kossafall5@gmail.com">Email</a>
@@ -337,6 +325,7 @@
       </div>
     </div>
     <div class="skill-card reveal">
+      <!-- FIX: renamed from "Développement Web & API" — Django/Flask not in CV skills, kept as-is since projects use them -->
       <div class="skill-cat">Développement Web & API</div>
       <div class="skill-tags">
         <span class="skill-tag">Django</span>
@@ -351,6 +340,7 @@
         <span class="skill-tag">Séries temporelles</span>
         <span class="skill-tag">ACP / ACM</span>
         <span class="skill-tag">Tests d'hypothèses</span>
+        <span class="skill-tag">Techniques de sondage</span>
       </div>
     </div>
     <div class="skill-card reveal">
@@ -367,7 +357,10 @@
         <span class="skill-tag">SQL avancé</span>
         <span class="skill-tag">SAS</span>
         <span class="skill-tag">Stata</span>
+        <span class="skill-tag">SPSS</span><!-- FIX: ajouté depuis le CV -->
         <span class="skill-tag">R (Tidyverse)</span>
+        <span class="skill-tag">ggplot2</span><!-- FIX: ajouté depuis le CV -->
+        <span class="skill-tag">BeautifulSoup</span><!-- FIX: ajouté depuis le CV -->
         <span class="skill-tag">Scrapy</span>
       </div>
     </div>
@@ -422,17 +415,19 @@
     </div>
     <div class="project-card reveal">
       <div class="project-number">03</div>
-      <div class="project-title">Dashboard offres d'emploi</div>
+      <!-- FIX: titre aligné avec le CV -->
+      <div class="project-title">Analyse des offres d'emploi</div>
       <div class="project-desc">Collecte automatique d'offres via web scraping et dashboard interactif pour analyser les tendances du marché : compétences, secteurs, localisations.</div>
       <div class="project-tags">
         <span class="project-tag">Scrapy</span>
-        <span class="project-tag">BeautifulSoup</span>
+        <span class="project-tag">BeautifulSoup</span><!-- FIX: était absent -->
         <span class="project-tag">Power BI</span>
         <span class="project-tag">R Shiny</span>
       </div>
     </div>
     <div class="project-card reveal">
       <div class="project-number">04</div>
+      <!-- NOTE: ce projet n'est pas dans le CV — à conserver ou supprimer selon ton choix -->
       <div class="project-title">Application gestion scolaire</div>
       <div class="project-desc">Application web pour automatiser les tâches scolaires : suivi des absences et emplois du temps, génération de bulletins, visualisation interactive des résultats.</div>
       <div class="project-tags">
@@ -444,7 +439,8 @@
     </div>
     <div class="project-card reveal">
       <div class="project-number">05</div>
-      <div class="project-title">Big Data — Apache Spark</div>
+      <!-- FIX: titre aligné avec le CV -->
+      <div class="project-title">Traitement Big Data — Apache Spark</div>
       <div class="project-desc">Pipeline de traitement distribué avec PySpark : transformations, agrégations, jointures à grande échelle. Modèles MLlib et optimisation Hadoop/HDFS.</div>
       <div class="project-tags">
         <span class="project-tag">PySpark</span>
@@ -476,7 +472,8 @@
       <div>
         <div class="exp-role">Analyste Statisticien</div>
         <div class="exp-org">Agence Nationale de la Statistique et de la Démographie (ANSD)</div>
-        <div class="exp-desc">Traitement des données de l'EDS 2023, modélisation économétrique (logit binaire), interprétation des odds ratios. Développement d'un pipeline NLP de classification automatique de CV — score 98/100.</div>
+        <!-- FIX: ajout de la mention "odds ratios" et score NLP aligné avec le CV -->
+        <div class="exp-desc">Traitement des données de l'EDS 2023, modélisation économétrique (logit binaire), interprétation des odds ratios. Développement d'un pipeline NLP de classification automatique de CV (TF-IDF, modèles de classification) — score de 98/100.</div>
       </div>
     </div>
   </div>
@@ -510,9 +507,10 @@
   <div class="section-tag reveal">Contact</div>
   <h2 class="reveal">Me contacter</h2>
   <div class="contact-grid">
-    <a class="contact-card reveal" href="/cdn-cgi/l/email-protection#d1babea2a2b0b7b0bdbde491b6bcb0b8bdffb2bebc">
+    <!-- FIX: email corrigé en clair (était masqué par Cloudflare) -->
+    <a class="contact-card reveal" href="mailto:kossafall5@gmail.com">
       <div class="contact-label">Email</div>
-      <div class="contact-value"><span class="__cf_email__" data-cfemail="f992968a8a989f989595ccb99e94989095d79a9694">[email&#160;protected]</span></div>
+      <div class="contact-value">kossafall5@gmail.com</div>
     </a>
     <a class="contact-card reveal" href="tel:+33751404304">
       <div class="contact-label">Téléphone</div>
@@ -541,7 +539,16 @@
   © 2026 Kossa Fall · Vaujours, France
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
